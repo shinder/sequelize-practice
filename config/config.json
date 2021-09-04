@@ -8,7 +8,9 @@
     "define": {
       "charset": "utf8mb4",
       "collate": "utf8mb4_general_ci" 
-    }
+    },
+    "logging": false,
+    "logging-desc": " logging 預設值為 console.log"
   },
   "test": {
     "username": "root",
