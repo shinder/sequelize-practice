@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING
         },
         publishDate: {
-            type: DataTypes.DATE
+            type: DataTypes.DATEONLY
         },
         pages: {
             type: DataTypes.INTEGER,
@@ -38,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
         },
         introduction: {
-            type: DataTypes.STRING(500),
+            type: DataTypes.STRING(1000),
         },
         visible: {
             type: DataTypes.INTEGER,
