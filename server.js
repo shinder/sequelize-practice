@@ -6,6 +6,8 @@ const {
     Product,
     User,
 } = require('./models/index');
+const { Op } = Sequelize;
+
 const express = require('express');
 
 
@@ -59,7 +61,41 @@ app.get('/cate/:id(\\d+)', async (req, res)=>{
     res.json(output);
 });
 
-// TODO: pagination
+// 分頁, pagination
+app.get('/product', async (req, res)=>{
+    const perPage = 4;
+    let page = 1;
+    if(req.query.page){
+        page = parseInt(req.query.page);
+    }
+    if(page<1) {
+        return res.redirect('?page=1');
+    }
+
+    let output = {};
+
+    // result = { count, rows}; // 將取得兩個屬性
+    const {count, rows} = await Product.findAndCountAll({
+        where: {
+            // price: {
+            //     [Op.lte]: 500
+            // }
+        },
+        limit: perPage,
+        offset: (page-1)*perPage
+    });
+    if(count !== 0 && rows.length===0) {
+        return res.redirect('?page=1');
+    }
+    output = {
+        count,
+        rows,
+        perPage,
+        page,
+        totalPages: Math.ceil(count/perPage)
+    }
+    res.json(output);
+});
 
 // 讀取再修改產品的價格
 app.get('/product/price/:id(\\d+)', async (req, res)=>{
