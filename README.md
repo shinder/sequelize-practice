@@ -75,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
 };
 ```
 
-## 建立測試的主程式 ```index.js```
+## 建立測試的程式 ```db-init.js```
 
 ``` js
 const {
@@ -93,10 +93,11 @@ const {
 })();
 ```
 
-執行主程式
+執行程式
 
 ``` bash
-node index.js
+node db-init.js
 ```
 
 若資料庫連線設定沒有錯誤，將會產生 ```Users``` 資料表，並新增一筆資料。
+匯入包含測試資料的 ```data.sql``` 檔後，完成資料的準備。
